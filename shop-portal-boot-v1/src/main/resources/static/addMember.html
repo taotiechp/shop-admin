@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>会员注册</title>
+    <link rel="stylesheet" href="/js/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/js/DataTables/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="/js/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css"/>
+    <link rel="stylesheet" href="/js/bootstrap-select/bootstrap-select.min.css"/>
+    <link rel="stylesheet" href="/js/Ztree/css/zTreeStyle/zTreeStyle.css">
+    <link rel="stylesheet" href="/js/bootstrapvalidator/dist/css/bootstrapValidator.css">
+    <link rel="icon" href="/js/shop/assets/img/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="/js/shop/css/webbase.css" />
+    <link rel="stylesheet" type="text/css" href="/js/shop/css/pages-JD-index.css" />
+    <link rel="stylesheet" type="text/css" href="/js/shop/css/widget-jquery.autocomplete.css" />
+    <link rel="stylesheet" type="text/css" href="/js/shop/css/widget-cartPanelView.css" />
+</head>
+<body>
+
+<div id="navId"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">会员注册</div>
+                <div class="panel-body">
+                    <form id="registrationForm" method="post" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">用户名：</label>
+                            <div class="col-sm-8">
+                                <input type="text" name="memberName" class="form-control" id="add_memberName"  placeholder="请输入用户名..." onblur="queryMemberName()">
+                            </div>
+                            <div class="col-sm-2" id="memNameDiv" style="display: none">
+                                <font size="4" color="red">*用户名已存在</font>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">密码：</label>
+                            <div class="col-sm-8">
+                                <input type="password" name="passWord" id="add_password" class="form-control" placeholder="请输入密码...">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">确认密码：</label>
+                            <div class="col-sm-8">
+                                <input type="password" name="passWords" id="add_passwords" class="form-control" placeholder="请再次输入密码...">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">真实姓名：</label>
+                            <div class="col-sm-8">
+                                <input type="text" name="realName" id="add_realName" class="form-control" placeholder="请输入真实姓名...">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="inputGroupSuccess2">手机号:</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="inputGroupSuccess2" name="phone" aria-describedby="inputGroupSuccess2Status" placeholder="请输入手机号..." onblur="queryPhone()">
+                                    <a class="input-group-addon" id="SMSCodes" onclick="sendCode()">发送验证码</a>
+                                    <!--<span class="input-group-btn">
+                                        <button class="btn btn-info" id="SMSCodes" onclick="sendCode()">发送验证码!</button>
+                                    </span>-->
+                                </div>
+                            </div>
+                            <div class="col-sm-2"  id="memberPhoneDiv" style="display: none">
+                                <font size="4" color="red">*手机号已存在</font>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">验证码：</label>
+                            <div class="col-sm-8">
+                                <input type="text" name="code" class="form-control" id="add_code" placeholder="请输入手机短信验证码...">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">邮箱：</label>
+                            <div class="col-sm-8">
+                                <input type="email" name="email" class="form-control" id="add_email" placeholder="请输入邮箱..." onblur="queryMemberEmail()">
+                            </div>
+                            <div class="col-sm-2" id="memberEmailDiv" style="display: none">
+                                <font size="4" color="red">*邮箱已存在</font>
+                            </div>
+                        </div>
+
+                        <div class="form-group" id="add_Area">
+                            <label class="col-sm-2 control-label">地区：</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">生日：</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="add_birthday" name="add_birthday" class="form-control" placeholder="请输入生日...">
+                                <!--<input type="text" name="birthday" class="form-control" id="add_birthday" placeholder="请输入生日...">-->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                        <div class="col-sm-9 col-sm-offset-3">
+                            <button type="submit" class="btn btn-primary" onclick="submits()">注册会员</button>
+                            <button type="reset" class="btn btn-info"><i class="glyphicon glyphicon-refresh">重置</i></button>
+                        </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/js/jquery-3.3.1.js"></script>
+<script src="/js/DataTables/js/jquery.dataTables.min.js"></script>
+<script src="/js/DataTables/js/dataTables.bootstrap.min.js"></script>
+<script src="/js/bootstrap/js/bootstrap.min.js"></script>
+<script src="/js/bootbox/bootbox.min.js"></script>
+<script src="/js/bootstrap-datetimepicker/js/moment-with-locales.js"></script>
+<script src="/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script src="/js/bootstrap-select/bootstrap-select.min.js"></script>
+<script src="/js/Ztree/js/jquery.ztree.core.min.js"></script>
+<script src="/js/Ztree/js/jquery.ztree.all.min.js"></script>
+<script src="/js/bootstrapvalidator/dist/js/bootstrapValidator.js"></script>
+<script src="/js/shop/js/pages/index.js"></script>
+<script src="/js/jquery.cookie.min.js"></script>
+<script src="/js/common/nav.js"></script>
+</body>
+<script>
+    $(function () {
+        initArea(1);
+        addMemberDate();
+    })
+    //增加地区
+    function initArea(id,obj) {
+        $(obj).parent().nextAll().remove();
+        $.ajax({
+            type:"get",
+            url:"http://localhost:8081/areas/"+id+".wl",
+            success:function (result) {
+                if (result.code == 200) {
+                    if (result.data.length == 0) {
+                        return ;
+                    }
+                    var html = '<div class="col-sm-2">';
+                    html += '<select name = className class="form-control" onchange="initArea(this.value,this)">';
+                    html += '<option class="form-control" value="-1">===请选择===</option>';
+                    var classArr = result.data;
+                    for (var i=0;i < classArr.length;i++){
+                        html += '<option class="form-control" value="'+classArr[i].id+'">'+classArr[i].name+'</option>';
+                    }
+                    html += '</select></div>';
+                    $("#add_Area").append(html);
+                }
+            }
+        })
+    }
+    //发送验证码
+    function sendCode() {
+        var v_phone = $("#inputGroupSuccess2").val();
+        $.ajax({
+            url:"http://localhost:8081/members/sendCode.wl",
+            type:"post",
+            dataType:"json",
+            data:{"phone":v_phone},
+            success:function (res) {
+                if (res.code==200){
+                    alert("验证码发送成功，请注意查收,有效时间五分钟");
+                    countdownHandler();
+                }else{
+                    alert(res.msg);
+                }
+            },
+            error:function (res) {
+                alert("错误")
+            }
+        })
+    }
+    //注册会员
+    function submits() {
+        var v_memberName = $("#add_memberName").val();
+        var v_passWord = $("#add_password").val();
+        var v_passWords = $("#add_passwords").val();
+        var v_realName = $("#add_realName").val();
+        var v_phone = $("#inputGroupSuccess2").val();
+        var v_code = $("#add_code").val();
+        var v_email = $("#add_email").val();
+        var v_birthday = $("#add_birthday").val();
+        var v_areaid1 = $($("select[name='className']")[0]).val();
+        var v_areaid2 = $($("select[name='className']")[1]).val();
+        var v_areaid3 = $($("select[name='className']")[2]).val();
+        if (v_passWord != v_passWords) {
+            alert("两次密码不一致，请重新输入");
+            return false;
+        }
+        //定义一个param
+        var param = {};
+        param.memberName = v_memberName;
+        param.passWord = v_passWord;
+        param.realName = v_realName;
+        param.phone = v_phone;
+        param.code = v_code;
+        param.email = v_email;
+        param.birthday = v_birthday;
+        param.area1 = v_areaid1;
+        param.area2 = v_areaid2;
+        param.area3 = v_areaid3;
+        $.ajax({
+            url:"http://localhost:8081/members.wl",
+            type:"post",
+            dataType:"json",
+            data:param,
+            success:function (res) {
+                if (res.code==200){
+                    alert("注册成功");
+                }else{
+                    alert(res.msg)
+                }
+            },
+            error:function (res) {
+                alert("错误")
+            }
+        })
+
+    }
+    //用户名验证
+    function queryMemberName() {
+        var v_memName = $("#add_memberName").val();
+        if (v_memName==""){
+            return;
+        }
+        $.ajax({
+            url:"http://localhost:8081/members/queryMemberName.wl",
+            type:"get",
+            dataType:"json",
+            data:{"memberName":v_memName},
+            success:function (res) {
+                if (res.code==200){
+                    $("#memNameDiv").show();
+                }
+            },
+            error:function (res) {
+                alert("错误")
+            }
+        })
+    }
+    //手机号验证
+    function queryPhone() {
+        var v_phone = $("#inputGroupSuccess2").val();
+        if (v_phone==""){
+            return;
+        }
+        $.ajax({
+            url:"http://localhost:8081/members/queryPhone.wl",
+            type:"get",
+            dataType:"json",
+            data:{"phone":v_phone},
+            success:function (res) {
+                if (res.code==200){
+                    $("#memberPhoneDiv").show();
+                }
+            },
+            error:function (res) {
+                alert("错误")
+            }
+        })
+    }
+    //邮箱验证
+    function queryMemberEmail() {
+        var v_email = $("#add_email").val();
+        if (v_email==""){
+            return;
+        }
+        $.ajax({
+            url:"http://localhost:8081/members/queryMemberEmail.wl",
+            type:"get",
+            dataType:"json",
+            data:{"email":v_email},
+            success:function (res) {
+                if (res.code==200){
+                    $("#memberEmailDiv").show();
+                }
+            },
+            error:function (res) {
+                alert("错误")
+            }
+        })
+    }
+    //计时
+    function countdownHandler() {
+        var v_button = $(".input-group-addon");
+        var number = 60;
+        var countdown = function(){
+            if (number == 0) {
+                //v_button.attr("disabled",false);
+                //v_button.href="javascript:return false;";
+                document.getElementById("SMSCodes").disabled=true;
+                v_button.html("发送验证码");
+                number = 60;
+                return;
+            } else {
+                v_button.attr("disabled",true);
+                v_button.html(number + "秒 重新发送");
+                number--;
+            }
+            setTimeout(countdown,1000);
+        }
+        setTimeout(countdown,1000);
+    }
+    //时间控件
+    function addMemberDate(){
+        $("#startDate").datetimepicker({
+            format: 'YYYY-MM-DD',
+            locale: 'zh-CN',
+            showClear: true
+        });
+        $("#add_birthday").datetimepicker({
+            format:'YYYY-MM-DD',
+            locale: 'zh-CN',
+        })
+    }
+
+</script>
+<script>
+    $(".getCode").on("click",function(){
+        time(this);
+    });
+    //验证码倒计时
+    var wait = 5;
+    function time(obj) {
+        if(wait==0) {
+            $(".getCode").removeAttr("disabled");
+            $(".getCode").text("获取验证码");
+            wait = 5;
+        }else {
+            $(".getCode").attr("disabled","true");
+            $(".getCode").text(wait+"秒后重试");
+            wait--;
+            setTimeout(function() { //倒计时方法
+                time(obj);
+            },1000);    //间隔为1s
+        }
+    }
+</script>
+</html>

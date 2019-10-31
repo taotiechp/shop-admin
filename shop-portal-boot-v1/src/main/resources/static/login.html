@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <link rel="stylesheet" href="/js/bootstrap/css/bootstrap.min.css">
+
+</head>
+<body>
+<!--<center>
+    <form>
+    <table>
+        <tr>
+            <td>用户名：</td>
+            <td><input type="text" id="memberName"></td>
+        </tr>
+        <tr>
+            <td>密码：</td>
+            <td><input type="password" id="passWord"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <input type="button" value="提交" onclick="login()">
+                <input type="reset" value="重置">
+            </td>
+        </tr>
+    </table>
+</form>
+</center>-->
+
+<ul id="myTab" class="nav nav-tabs">
+    <li class="active" style="margin-left: 700px">
+        <a href="#home" data-toggle="tab">
+            账户登录
+        </a>
+    </li>
+    <li><a href="#ios" data-toggle="tab">免密登录</a></li>
+
+</ul>
+<div id="myTabContent" class="tab-content">
+    <div class="tab-pane fade in active" id="home">
+        <!--<center><form>
+            <table>
+                <tr>
+                    <td>用户名：</td>
+                    <td><input type="text" id="memberName"></td>
+                </tr>
+                <tr>
+                    <td>密码：</td>
+                    <td><input type="password" id="passWord"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="button" value="提交" onclick="login()">
+                        <input type="reset" value="重置">
+                    </td>
+                </tr>
+            </table>
+        </form></center>-->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">会员登录</div>
+                        <div class="panel-body">
+                            <form id="" method="post" class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">用户名：</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="memberName" class="form-control" id="memberName"  placeholder="请输入用户名...">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">密码：</label>
+                                    <div class="col-sm-8">
+                                        <input type="password" name="passWord" id="passWord" class="form-control" placeholder="请输入密码...">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-9 col-sm-offset-3">
+                                        <button  type="button" class="btn btn-primary" onclick="login()">登录</button>
+                                        <button type="reset" class="btn btn-info"><i class="glyphicon glyphicon-refresh">重置</i></button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="ios">
+        <!--<form>
+            <table>
+                <tr>
+                    <td>手机号：</td>
+                    <td><input type="text" id="phone"></td>
+                </tr>
+                <tr>
+                    <td>验证码：</td>
+                    <td><input type="text" id="code"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="button" value="提交" onclick="loginCode()">
+                        <input type="reset" value="重置">
+                    </td>
+                </tr>
+            </table>
+        </form>-->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">会员登录</div>
+                        <div class="panel-body">
+                            <form id="registrationForm" method="post" class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2" for="inputGroupSuccess2">手机号:</label>
+                                    <div class="col-sm-8">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="inputGroupSuccess2" name="phone" aria-describedby="inputGroupSuccess2Status" placeholder="请输入手机号..." onblur="queryPhone()">
+                                            <a class="input-group-addon" id="SMSCodes" onclick="sendCode()">发送验证码</a>
+                                            <!--<span class="input-group-btn">
+                                                <button class="btn btn-info" id="SMSCodes" onclick="sendCode()">发送验证码!</button>
+                                            </span>-->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">验证码：</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="code" class="form-control" id="add_code" placeholder="请输入手机短信验证码...">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-9 col-sm-offset-3">
+                                        <button type="button" class="btn btn-primary" onclick="loginCode()">登录</button>
+                                        <button type="reset" class="btn btn-info"><i class="glyphicon glyphicon-refresh">重置</i></button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="/js/jquery-3.3.1.js"></script>
+<script src="/js/jquery.cookie.min.js"></script>
+<script src="/js/common/nav.js"></script>
+<script src="/js/bootstrap/js/bootstrap.min.js"></script>
+
+<script>
+    $(function () {
+
+    })
+    //账户登录
+    function login() {
+        var v_memberName = $("#memberName").val();
+        var v_passWord = $("#passWord").val();
+        if (v_memberName == ""){
+            alert("用户名不能为空");
+            return false;
+        }
+        if (v_passWord == "") {
+            alert("密码不能为空");
+            return false;
+        }
+        var param = {};
+        param.memberName = v_memberName;
+        param.passWord = v_passWord;
+        $.ajax({
+            url:"http://localhost:8081/members/login.wl",
+            type:"post",
+            data:param,
+            success:function (result) {
+                if (result.code == 200) {
+                    //调用外部js方法将用户信息签名存入cookie
+                    $.cookie("fh_id",result.data);
+                    location.href="/index.html";
+                }
+            }
+        })
+    }
+    //发送验证码
+    function sendCode() {
+        var v_phone = $("#inputGroupSuccess2").val();
+        $.ajax({
+            url:"http://localhost:8081/members/sendCode.wl",
+            type:"post",
+            dataType:"json",
+            data:{"phone":v_phone},
+            success:function (res) {
+                if (res.code==200){
+                    alert("验证码发送成功，请注意查收,有效时间1分钟");
+                }else{
+                    alert(res.msg);
+                }
+            },
+            error:function (res) {
+                alert("错误")
+            }
+        })
+    }
+    //验证码登录
+    function loginCode() {
+        var v_phone = $("#inputGroupSuccess2").val();
+        var v_code = $("#add_code").val();
+        //定义一个param
+        var param = {};
+        param.phone = v_phone;
+        param.code = v_code;
+        $.ajax({
+            url:"http://localhost:8081/members/loginCode.wl",
+            type:"post",
+            data:param,
+            success:function (res) {
+                if (res.code==200){
+                    $.cookie("fh_id",res.data);
+                    location.href="/index.html";
+                }else{
+                    alert(res.msg)
+                }
+            },
+            error:function (res) {
+                alert("错误")
+            }
+        })
+    }
+
+</script>
+</body>
+</html>

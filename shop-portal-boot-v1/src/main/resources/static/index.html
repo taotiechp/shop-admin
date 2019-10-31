@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>商品首页</title>
+    <link rel="stylesheet" href="/js/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/js/DataTables/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="/js/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css"/>
+    <link rel="stylesheet" href="/js/bootstrap-select/bootstrap-select.min.css"/>
+    <link rel="stylesheet" href="/js/Ztree/css/zTreeStyle/zTreeStyle.css">
+    <link rel="stylesheet" href="/js/bootstrapvalidator/dist/css/bootstrapValidator.css">
+    <link rel="icon" href="/js/shop/assets/img/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="/js/shop/css/webbase.css" />
+    <link rel="stylesheet" type="text/css" href="/js/shop/css/pages-JD-index.css" />
+    <link rel="stylesheet" type="text/css" href="/js/shop/css/widget-jquery.autocomplete.css" />
+    <link rel="stylesheet" type="text/css" href="/js/shop/css/widget-cartPanelView.css" />
+</head>
+<body>
+<!--<nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container-fluid">
+        &lt;!&ndash; Brand and toggle get grouped for better mobile display &ndash;&gt;
+        <p class="navbar-text"><font size="4px">飞狐电商主页</font></p>
+
+
+
+        &lt;!&ndash; Collect the nav links, forms, and other content for toggling &ndash;&gt;
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            &lt;!&ndash;<ul class="nav navbar-nav">
+
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">商品品牌<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">商品管理<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">分类管理<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">日志管理<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">地区管理<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">用户管理<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/user/toList.wl">用户列表</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="/role/toRoeList.wl">角色列表</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="/resource/toMenu.wl">菜单列表</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="/product/toList.wl">商品列表</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="/brand/toBrandList.wl">品牌列表</a></li>
+                    </ul>
+                </li>
+            </ul>&ndash;&gt;
+
+            <ul class="nav navbar-nav navbar-right">
+                <li id="loginInfo"><a href="/login.html"><font size="4px">登录</font></a></li>
+                <li><a href="#" onclick="addMember()"><font size="4px">注册</font></a></li>
+            </ul>
+        </div>&lt;!&ndash; /.navbar-collapse &ndash;&gt;
+    </div>&lt;!&ndash; /.container-fluid &ndash;&gt;
+</nav>-->
+<div id="navId"></div>
+<div id="nav-bottom">
+    <!--顶部-->
+    <div class="nav-top">
+        <!--头部-->
+        <div class="header">
+            <div class="py-container">
+                <div class="yui3-g NavList">
+                    <div class="yui3-u Left all-sort">
+                        <h4>全部商品分类</h4>
+                    </div>
+                    <div class="yui3-u Center navArea">
+                        <ul class="nav">
+                            <li class="f-item">服装城</li>
+                            <li class="f-item">美妆馆</li>
+                            <li class="f-item">品优超市</li>
+                            <li class="f-item">全球购</li>
+                            <li class="f-item">闪购</li>
+                            <li class="f-item">团购</li>
+                            <li class="f-item">有趣</li>
+                        </ul>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--列表-->
+<div class="sort">
+    <div class="py-container">
+        <div class="yui3-g SortList ">
+            <div class="yui3-u Left all-sort-list">
+                <div class="all-sort-list2" id="classDiv">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <!--<div class="row" style="color: #dca7a7">
+        <ol class="breadcrumb" id="brandListId">
+        </ol>
+    </div>-->
+    <div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">商品查询</div>
+            <div class="panel-body" id="productDiv">
+
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">热销品牌名称</div>
+                <div class="panel-body" id="brandListId">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--模板-->
+<div style="display: none" id="templateDiv">
+    <div class="col-md-4">
+        <div class="thumbnail">
+            <img src="http://localhost:8080/upload/img/##img##" style="width: 150px;height: 150px">
+            <div class="caption">
+                <h3>商品名：##productName##</h3>
+                <p>商品价格：##productPrice##</p>
+                <p><a href="#" class="btn btn-primary" role="button" onclick="buyProduct('##productId##','add',1)">购买</a> <a href="#" class="btn btn-default" role="button">收藏</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="display: none" id="brandTemplateDiv">
+    <div class="col-md-4">
+        <div class="thumbnail">
+            <img src="http://localhost:8080/##img##" style="width: 150px;height: 150px">
+            <div class="caption">
+                <h3>品牌名：##brandName##</h3>
+                <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+<!--注册-->
+<div id="AddMember" style="display: none">
+    <form id="registrationForm" method="post" class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">用户名：</label>
+            <div class="col-sm-10">
+                <input type="text" name="userName" class="form-control" id="add_userName"  placeholder="请输入用户名...">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">密码：</label>
+            <div class="col-sm-10">
+                <input type="password" name="passWord" id="add_password" class="form-control" placeholder="请输入密码...">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">确认密码：</label>
+            <div class="col-sm-10">
+                <input type="password" name="passWords" id="add_passwords" class="form-control" placeholder="请再次输入密码...">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">真实姓名：</label>
+            <div class="col-sm-10">
+                <input type="text" name="realName" id="add_realName" class="form-control" placeholder="请输入真实姓名...">
+            </div>
+        </div>
+        <!--<div class="form-group">
+            <label class="col-sm-2 control-label">手机号：</label>
+            <div class="col-sm-8" class="input-group">
+                <input type="text" name="phone" class="form-control" id="add_phone" placeholder="手机号">
+                <span class="input-group-addon">发送验证码</span>
+            </div>
+            &lt;!&ndash;<div class="col-sm-2">
+                <button class="btn-primary">发送验证码</button>
+            </div>&ndash;&gt;
+        </div>-->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="inputGroupSuccess2">手机号:</label>
+            <div class="col-sm-10">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="inputGroupSuccess2" aria-describedby="inputGroupSuccess2Status" placeholder="请输入手机号...">
+                    <a class="input-group-addon">发送验证码</a>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">验证码：</label>
+            <div class="col-sm-10">
+                <input type="email" name="email" class="form-control" id="add_email" placeholder="请输入手机短信验证码...">
+            </div>
+        </div>
+        <div class="form-group" id="add_Area">
+            <label class="col-sm-2 control-label">地区：</label>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-9 col-sm-offset-3">
+                <button type="submit" class="btn btn-primary">注册会员</button>
+                <button type="reset" class="btn btn-info"><i class="glyphicon glyphicon-refresh">重置</i></button>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+<script src="/js/jquery-3.3.1.js"></script>
+<script src="/js/DataTables/js/jquery.dataTables.min.js"></script>
+<script src="/js/DataTables/js/dataTables.bootstrap.min.js"></script>
+<script src="/js/bootstrap/js/bootstrap.min.js"></script>
+<script src="/js/bootbox/bootbox.min.js"></script>
+<script src="/js/bootstrap-datetimepicker/js/moment-with-locales.js"></script>
+<script src="/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script src="/js/bootstrap-select/bootstrap-select.min.js"></script>
+<script src="/js/Ztree/js/jquery.ztree.core.min.js"></script>
+<script src="/js/Ztree/js/jquery.ztree.all.min.js"></script>
+<script src="/js/bootstrapvalidator/dist/js/bootstrapValidator.js"></script>
+<script src="/js/shop/js/pages/index.js"></script>
+<script src="/js/jquery.cookie.min.js"></script>
+<script src="/js/common/nav.js"></script>
+
+<script>
+    var AddMemberHtml;
+    $(function () {
+        //获取增加 获取源，备份
+        AddMemberHtml = $("#AddMember").html();
+        initProductList();
+        initBrandList();
+        initClassify();
+        //loginInfo();
+    })
+
+    var classArr;
+    var v_html = "";
+    function initClassify() {
+        $.ajax({
+            url:"http://localhost:8081/classify/findClassifyList.wl",
+            type:"post",
+            success:function (result) {
+                if (result.code == 200){
+                    classArr = result.data;
+                    buildClass(0);
+                    $("#classDiv").html(v_html);
+                    console.log(v_html)
+                    initCss();
+                }
+            }
+        })
+    }
+
+    function buildClass(id) {
+        var class1 = getChild(id);
+        for (var i = 0; i < class1.length; i++) {
+            v_html += '<div class="item">';
+            v_html += '<h3><a href="">'+class1[i].name+'</a></h3>';
+            v_html += '<div class="item-list clearfix">';
+            v_html += '<div class="subitem">';
+            buildClass2(class1[i].id);
+            v_html += '<div>';
+            v_html += '<div>';
+            v_html += '<div>';
+
+            /*v_html += '<div class="item">';
+            v_html += '<h3><a href="">'+class1[i].name+'</a></h3>';
+            v_html += '<div class="item-list clearfix">';
+            v_html += '<div class="subitem">';
+            buildClass2(class1[i].id);
+            v_html += '</div>';
+            v_html += '</div>';
+            v_html += '</div>';*/
+
+        }
+    }
+
+    function buildClass2(id) {
+        var class2 = getChild(id);
+        for (var i = 0;i < class2.length;i++){
+            v_html += '<dl class="fore'+(i+1)+'">';
+            v_html += '<dt><a href="">'+class2[i].name+'</a></dt>';
+            v_html += '<dd>';
+            buildClass3(class2[i].id);
+            v_html += '</dd>';
+            v_html += '</dl>';
+
+            /*v_html += '<dl class="fore'+(i+1)+'">';
+            v_html += '<dt><a href="">'+class2[i].name+'</a></dt>';
+            v_html += '<dd>';
+            buildClass3(class2[i].id);
+            v_html += '</dd>';
+            v_html += '</dl>';*/
+
+        }
+    }
+
+    function buildClass3(id) {
+        var class3 = getChild(id);
+        for (var i = 0;i < class3.length;i++){
+            v_html += '<em><a href="">'+class3[i].name+'</a></em>';
+            /*v_html += '<em><a href="">'+class3[i].name+'</a></em>';*/
+        }
+    }
+
+    function getChild(id) {
+        var v_childs = [];
+        for (var i=0;i < classArr.length;i++){
+            if (classArr[i].pid == id){
+                v_childs.push(classArr[i])
+            }
+        }
+        return v_childs;
+    }
+    //商品
+    function initProductList() {
+        $.ajax({
+            url:"http://localhost:8081/product/toList.wl",
+            type:"post",
+            dataType:"jsonp",
+            success:function (result) {
+                if (result.code == 200) {
+                    var data = result.data;
+                    var v_Template = $("#templateDiv").html();
+                    for (var i = 0; i < data.length; i++) {
+                        var product = data[i];
+                        console.log(product)
+                        var productHtml = v_Template.replace(/##productName##/g,product.productName)
+                            .replace(/##productPrice##/g,product.productPrice)
+                            .replace(/##img##/g,product.productPhoto)
+                            .replace(/##productId##/g,product.id);
+                        $("#productDiv").append(productHtml)
+                    }
+                }
+            }
+        })
+    }
+    //热销品牌
+    function initBrandList() {
+        $.ajax({
+            url:"http://localhost:8081/brand/toList.wl",
+            type:"post",
+            beforeSend:function(xhr){
+                var heads = $.cookie("fh_id");
+                xhr.setRequestHeader("x-auth",heads);
+            },
+            //dataType:"jsonp",
+            success:function (result) {
+                if (result.code == 200) {
+                    var data = result.data;
+                    var v_brandTemplate = $("#brandTemplateDiv").html();
+                    for (var i = 0; i < data.length; i++) {
+                        var brand = data[i];
+                        var brandHtml = v_brandTemplate.replace(/##brandName##/g,brand.brandName)
+                            .replace(/##img##/g,brand.photo);
+                        $("#brandListId").append(brandHtml)
+                    }
+                }
+            }
+        })
+    }
+
+
+    //样式
+    function initCss() {
+        $('.all-sort-list2 > .item').hover(function() {
+            //父类分类列表容器的高度
+
+            $(this).addClass('hover');
+            $(this).children('.item-list').css('display', 'block');
+        }, function() {
+            $(this).removeClass('hover');
+            $(this).children('.item-list').css('display', 'none');
+        });
+
+        $('.item > .item-list > .close').click(function() {
+            $(this).parent().parent().removeClass('hover');
+            $(this).parent().hide();
+        });
+    }
+
+</script>
+</body>
+</html>
