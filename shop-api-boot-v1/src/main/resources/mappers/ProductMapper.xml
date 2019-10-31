@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fh.shop.api.product.mapper.IProductMapper" >
+
+    <update id="updateStock">
+        update t_product set stock = stock-#{count} where id = #{id} and stock >= #{count}
+    </update>
+
+    <!--查询库存危险的商品-->
+    <select id="findStock" resultType="com.fh.shop.api.product.po.Product">
+        select productName,stock,productPrice from t_product where stock &lt;= 10
+    </select>
+
+</mapper>
